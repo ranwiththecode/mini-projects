@@ -5,7 +5,7 @@ Each folder contains its own code, dependencies, and example outputs.
 
 ## Projects
 
-### 1. [Social Media Data Analysis](./social-media-data-analysis)
+### 1. [Social Media Data Analysis](./SocialMediaDataAnalysis.py)
 **Description:**  
 Generates a simulated dataset of social media posts, cleans it, explores it, and visualizes engagement trends. Produces histograms, boxplots, and summary statistics.
 
