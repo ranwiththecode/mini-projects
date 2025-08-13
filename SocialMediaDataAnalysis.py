@@ -1,44 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Clean & Analyze Social Media
-
-# ## Introduction
-# 
-# Social media has become a ubiquitous part of modern life, with platforms such as Instagram, Twitter, and Facebook serving as essential communication channels. Social media data sets are vast and complex, making analysis a challenging task for businesses and researchers alike. In this project, we explore a simulated social media, for example Tweets, data set to understand trends in likes across different categories.
-# 
-# ## Prerequisites
-# 
-# To follow along with this project, you should have a basic understanding of Python programming and data analysis concepts. In addition, you may want to use the following packages in your Python environment:
-# 
-# - pandas
-# - Matplotlib
-# - ...
-# 
-# These packages should already be installed in Coursera's Jupyter Notebook environment, however if you'd like to install additional packages that are not included in this environment or are working off platform you can install additional packages using `!pip install packagename` within a notebook cell such as:
-# 
-# - `!pip install pandas`
-# - `!pip install matplotlib`
-# 
-# ## Project Scope
-# 
-# The objective of this project is to analyze tweets (or other social media data) and gain insights into user engagement. We will explore the data set using visualization techniques to understand the distribution of likes across different categories. Finally, we will analyze the data to draw conclusions about the most popular categories and the overall engagement on the platform.
-# 
-# ## Step 1: Importing Required Libraries
-# 
-# As the name suggests, the first step is to import all the necessary libraries that will be used in the project. In this case, we need pandas, numpy, matplotlib, seaborn, and random libraries.
-# 
-# Pandas is a library used for data manipulation and analysis. Numpy is a library used for numerical computations. Matplotlib is a library used for data visualization. Seaborn is a library used for statistical data visualization. Random is a library used to generate random numbers.
-
-# In[1]:
-
-
 get_ipython().system('pip install pandas')
 get_ipython().system('pip install matplotlib')
-
-
-# In[12]:
-
 
 from __future__ import annotations
 
@@ -52,10 +13,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
-# In[15]:
-
-
 @dataclass
 class Config:
     n: int = 500
@@ -63,8 +20,7 @@ class Config:
     outdir: Path = Path("outputs")
     seed: int = 42
 
-
-# Task 2 – Generate random data
+# generate random data
 def generate_random_data(cfg: Config) -> Dict[str, List]:
     random.seed(cfg.seed)
     np.random.seed(cfg.seed)
@@ -81,8 +37,8 @@ def generate_random_data(cfg: Config) -> Dict[str, List]:
         "Likes": likes,
     }
 
+# load and explore data
 
-# Task 3 – Load & Explore
 def load_dataframe(data: Dict[str, List]) -> pd.DataFrame:
     return pd.DataFrame(data)
 
@@ -104,7 +60,7 @@ def explore_dataframe(df: pd.DataFrame) -> None:
     print(df["Category"].value_counts())
 
 
-# Task 4 – Clean the data
+# Clean the data
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df_clean = df.dropna().drop_duplicates()
     df_clean["Date"] = pd.to_datetime(df_clean["Date"])
@@ -112,7 +68,7 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return df_clean
 
 
-# Task 5 – Visualize & Analyze
+# Visualize & Analyze
 def visualize(df: pd.DataFrame, outdir: Path) -> None:
     outdir.mkdir(parents=True, exist_ok=True)
 
@@ -183,6 +139,7 @@ def main() -> None:
     write_conclusions_template(cfg.outdir)
     print(f"\nArtifacts saved to: {cfg.outdir.resolve()}")
 
+# run
 
 cfg = Config(n=500, start="2021-01-01", outdir=Path("outputs"), seed=42)
 data = generate_random_data(cfg)
@@ -192,10 +149,3 @@ df_clean = clean_dataframe(df)
 visualize(df_clean, cfg.outdir)
 analyze(df_clean, cfg.outdir)
 write_conclusions_template(cfg.outdir)
-
-
-# In[ ]:
-
-
-
-
